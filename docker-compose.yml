@@ -1,0 +1,57 @@
+version: "3.8"
+services:
+
+  elasticsearch-ik:
+    container_name: elasticsearch-ik
+    image: zmlccf/elasticsearch-ik:7.12.1
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - elasticsearch-ik:/usr/share/elasticsearch/data
+    restart: always
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: "true"
+      ES_JAVA_OPTS: "-Xms2g -Xmx2g"
+      ELASTIC_PASSWORD: admin123
+
+  letterlab-app:
+    container_name: letterlab-app
+    image: gothesun/letterlab-app:1.0.0
+    depends_on:
+      elasticsearch-ik:
+        condition: service_healthy
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - letterlab-app:/opt/gothesun/apps/letterlab-app/data
+    restart: always
+    environment:
+      WEB_DOMAIN: http://WEB_IP
+      ELASTICSEARCH_URI: elasticsearch-ik:9200
+      ELASTIC_PASSWORD: admin123
+
+  letterlab-web:
+    container_name: letterlab-web
+    image: gothesun/letterlab-web:1.0.0
+    depends_on:
+      elasticsearch-ik:
+        condition: service_healthy
+    restart: always
+    environment:
+      APP_DOMAIN: http://APP_IP
+
+  nginx:
+    container_name: nginx
+    image: nginx:1.21.0
+    depends_on:
+      letterlab-web:
+        condition: service_healthy
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - $PWD/nginx/nginx.conf:/etc/nginx/nginx.conf
+    restart: always
+    ports:
+      - "80:80"
+
+volumes:
+  elasticsearch-ik:
+  letterlab-app:
