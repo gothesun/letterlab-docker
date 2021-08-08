@@ -25,7 +25,7 @@ services:
       - letterlab-app:/opt/gothesun/apps/letterlab-app/data
     restart: always
     environment:
-      WEB_DOMAIN: http://WEB_IP
+      WEB_DOMAIN: http://WEB_DOMAIN
       ELASTICSEARCH_URI: elasticsearch-ik:9200
       ELASTIC_PASSWORD: admin123
 
@@ -37,7 +37,7 @@ services:
         condition: service_healthy
     restart: always
     environment:
-      APP_DOMAIN: http://APP_IP
+      APP_DOMAIN: http://APP_DOMAIN
 
   nginx:
     container_name: nginx
