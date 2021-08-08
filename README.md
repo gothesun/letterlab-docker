@@ -63,3 +63,17 @@ volumes:
   letterlab-app:
 ```
 注意，需将上述代码中的`WEP_DOMAIN`和`APP_DOMAIN`替换为自己实际的域名（ip）。
+
+启动服务仅需三步：
+1. 下载仓库至服务器上：
+``` bash
+git clone https://github.com/gothesun/letterlab-docker.git
+```
+2. 进入letterlab-docker目录，修改`WEP_DOMAIN`和`APP_DOMAIN`为实际域名
+3. 启动docker容器：
+``` bash
+docker-compose -d up
+```
+待容器都正常启动，即可通过域名访问letterlab系统。
+
+## 环境变量
