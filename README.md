@@ -103,6 +103,10 @@ elasticsearch-ik镜像是集成了ik-analysis分词器插件的elasticsearch镜�
 ## 高级配置
 若环境变量无法满足实际需求，可将letterlab-app镜像中$APP_HOME/resources目录下的application.properties文件拷贝到宿主机，修改配置项后通过docker volume挂载的形式重新启动letterlab-app容器。
 
+## 代码托管
+- [github](https://github.com/gothesun/letterlab-docker)
+- [gitee](https://gitee.com/gothesun/letterlab-docker)
+
 ## 交流反馈
 欢迎提交issue反馈问题，亦可通过QQ联系作者交流：2461836917。
 
