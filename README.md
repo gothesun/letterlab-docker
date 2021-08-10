@@ -22,7 +22,7 @@ services:
 
   letterlab-app:
     container_name: letterlab-app
-    image: registry.cn-shenzhen.aliyuncs.com/gothesun/letterlab-app:1.0.0
+    image: gothesun/letterlab-app:1.0.0
     depends_on:
       elasticsearch-ik:
         condition: service_healthy
@@ -37,7 +37,7 @@ services:
 
   letterlab-web:
     container_name: letterlab-web
-    image: registry.cn-shenzhen.aliyuncs.com/gothesun/letterlab-web:1.0.0
+    image: gothesun/letterlab-web:1.0.0
     depends_on:
       elasticsearch-ik:
         condition: service_healthy
